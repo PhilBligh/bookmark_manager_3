@@ -79,7 +79,7 @@ describe Bookmark do
     bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
     DatabaseConnection.query(
       "INSERT INTO comments (id, text, bookmark_id) VALUES(1, 'Test comment', $1)",
-      [bookmark_id])
+      [bookmark.id])
 
     comment = bookmark.comments.first
 
