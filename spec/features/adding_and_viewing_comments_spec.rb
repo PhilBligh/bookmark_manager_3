@@ -1,4 +1,4 @@
-eature 'Adding and viewing comments' do
+feature 'Adding and viewing comments' do
   feature 'a user can add and then view a comment' do
     scenario 'a comment is added to a bookmark' do
       bookmark = Bookmark.create(url: 'http://www.makersacademy.com', title: 'Makers Academy')
