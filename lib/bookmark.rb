@@ -47,5 +47,5 @@ class Bookmark
   def self.is_url?(url)
     url =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
-
+#change
 end
