@@ -16,6 +16,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/bookmarks' do
+    @user = User.find(session[:user_id])
     @bookmarks = Bookmark.all
     erb :'bookmarks/index'
   end
@@ -68,6 +69,16 @@ class BookmarkManager < Sinatra::Base
   get '/tags/:id/bookmarks' do
     @tag = Tag.find(id: params['id'])
     erb :'tags/index'
+  end
+
+  get '/users/new' do
+    erb :"users/new"
+  end
+
+  post '/users' do
+    user = User.create(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
+    redirect '/bookmarks'
   end
 
   run! if app_file == $0
