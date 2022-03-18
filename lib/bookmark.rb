@@ -47,5 +47,9 @@ class Bookmark
   def self.is_url?(url)
     url =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
-#change
+
+  def comments(comment_class = Comment)
+    comment_class.where(bookmark_id: id)
+  end
+
 end
