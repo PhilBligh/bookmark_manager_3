@@ -23,6 +23,18 @@ class User
     User.new(result[0]['id'], result[0]['email'])
   end
 
+  # in lib/user.rb
+
+  def self.authenticate(email:, password:)
+    result = DatabaseConnection.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    )
+    return unless result.any?
+    return unless BCrypt::Password.new(result[0]['password']) == password
+    User.new(result[0]['id'], result[0]['email'])
+  end
+
   attr_reader :id, :email
 
   def initialize(id:, email:)
