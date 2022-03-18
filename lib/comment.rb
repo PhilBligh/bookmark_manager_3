@@ -1,3 +1,5 @@
+require_relative './database_connection'
+
 class Comment
   def self.create(bookmark_id:, text:)
     result = DatabaseConnection.query(
@@ -13,8 +15,7 @@ class Comment
 
   def self.where(bookmark_id:)
     result = DatabaseConnection.query(
-      "SELECT * FROM comments WHERE bookmark_id = $1;",
-      [bookmark_id]
+      "SELECT * FROM comments WHERE bookmark_id = $1;", [bookmark_id]
     )
     result.map do |comment|
       Comment.new(
